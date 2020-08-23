@@ -15,6 +15,7 @@ public class DynamicPie : MonoBehaviour
         mesh.vertices = GetVertices();
         mesh.uv = GetUVs();
         mesh.triangles = GetTriangles();
+        mesh.normals = GetNormals();
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.material = this.material;
@@ -64,5 +65,19 @@ public class DynamicPie : MonoBehaviour
             7, 6, 5,
             7, 5, 4};
         return triangles;
+    }
+
+    private Vector3[] GetNormals()
+    {
+        Vector3[] normals = new Vector3[]{
+            new Vector3(-1, -1, 1),
+            new Vector3(-1, 1, 1),
+            new Vector3(-1, 1, -1),
+            new Vector3(-1, -1, -1),
+            new Vector3(1, -1, 1),
+            new Vector3(1, 1, 1),
+            new Vector3(1, 1, -1),
+            new Vector3(1, -1, -1)};
+        return normals;
     }
 }
