@@ -23,16 +23,39 @@ public class DynamicPie : MonoBehaviour
 
     private Vector3[] GetVertices()
     {
-        Vector3[] vertices = new Vector3[]{
-            new Vector3(0, 0, 0),
-            new Vector3(0, 1, 0),
-            new Vector3(0, 1, -1),
+        List<Vector3[]> listOfVertices = new List<Vector3[]>();
+        for (float angle = 0f; angle < 60f; angle += 50f)
+        {
+            Vector3[] slice = GetSliceAtAngle(angle);
+            listOfVertices.Add(slice);
+        }
+        return ListOfVerticesToArray(listOfVertices);
+    }
+
+    private Vector3[] GetSliceAtAngle(float angle)
+    {
+        Vector3[] verticesOfSlice = new Vector3[]{
             new Vector3(0, 0, -1),
-            new Vector3(1, 0, 0),
-            new Vector3(1, 1, 0),
-            new Vector3(1, 1, -1),
-            new Vector3(1, 0, -1)};
-        return vertices;
+            new Vector3(0, 1, -1),
+            new Vector3(0, 1, -2),
+            new Vector3(0, 0, -2)
+        };
+        for (int i = 0; i < 4; i++)
+            verticesOfSlice[i] = Quaternion.Euler(0, angle, 0) * verticesOfSlice[i];
+        return verticesOfSlice;
+    }
+
+    private Vector3[] ListOfVerticesToArray(List<Vector3[]> listOfVertices)
+    {
+        Vector3[] arrayOfVertices = new Vector3[listOfVertices.Count * 4];
+        for (int i = 0; i < listOfVertices.Count; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                arrayOfVertices[i * 4 + j] = listOfVertices[i][j];
+            }
+        }
+        return arrayOfVertices;
     }
 
     private Vector2[] GetUVs()
