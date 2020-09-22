@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class DynamicMesh
 {
+    private List<Vector3[]> slices;
+
     public DynamicMesh()
     {
-
+        this.slices = new List<Vector3[]>();
+        for (float angle = 0f; angle < 60f; angle += 50f)
+        {
+            Vector3[] slice = GetSliceAtAngle(angle);
+            this.slices.Add(slice);
+        }
     }
 
     private Vector3[] GetSliceAtAngle(float angle)
@@ -37,13 +44,7 @@ public class DynamicMesh
 
     public Vector3[] GetVertices()
     {
-        List<Vector3[]> slices = new List<Vector3[]>();
-        for (float angle = 0f; angle < 60f; angle += 50f)
-        {
-            Vector3[] slice = GetSliceAtAngle(angle);
-            slices.Add(slice);
-        }
-        return ListOfVerticesToArray(slices);
+        return ListOfVerticesToArray(this.slices);
     }
 
     public Vector2[] GetUVs()
