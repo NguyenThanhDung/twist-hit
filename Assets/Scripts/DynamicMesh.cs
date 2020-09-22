@@ -29,34 +29,17 @@ public class DynamicMesh
         return verticesOfSlice;
     }
 
-    private Vector3[] ListOfVerticesToArray(List<Vector3[]> listOfVertices)
-    {
-        Vector3[] arrayOfVertices = new Vector3[listOfVertices.Count * 4];
-        for (int i = 0; i < listOfVertices.Count; i++)
-        {
-            for (int j = 0; j < 4; j++)
-            {
-                arrayOfVertices[i * 4 + j] = listOfVertices[i][j];
-            }
-        }
-        return arrayOfVertices;
-    }
-
     public Vector3[] GetVertices()
     {
-        return ListOfVerticesToArray(this.slices);
+        return this.slices[0];
     }
 
     public Vector2[] GetUVs()
     {
         Vector2[] uvs = new Vector2[]{
-            new Vector2(0, 0),
             new Vector2(0, 1),
-            new Vector2(1, 1),
             new Vector2(0, 0),
-            new Vector2(0, 1),
-            new Vector2(1, 1),
-            new Vector2(0, 0),
+            new Vector2(1, 0),
             new Vector2(0, 1)};
         return uvs;
     }
@@ -65,31 +48,17 @@ public class DynamicMesh
     {
         int[] triangles = new int[]{
             0, 1, 2,
-            0, 2, 3,
-            0, 5, 1,
-            0, 4, 5,
-            2, 1, 5,
-            2, 5, 6,
-            3, 2, 6,
-            3, 6, 7,
-            0, 3, 7,
-            0, 7, 4,
-            7, 6, 5,
-            7, 5, 4};
+            0, 2, 3};
         return triangles;
     }
 
     public Vector3[] GetNormals()
     {
         Vector3[] normals = new Vector3[]{
-            new Vector3(-1, -1, 1),
-            new Vector3(-1, 1, 1),
-            new Vector3(-1, 1, -1),
-            new Vector3(-1, -1, -1),
-            new Vector3(1, -1, 1),
-            new Vector3(1, 1, 1),
-            new Vector3(1, 1, -1),
-            new Vector3(1, -1, -1)};
+            new Vector3(-1, 0, 0),
+            new Vector3(-1, 0, 0),
+            new Vector3(-1, 0, 0),
+            new Vector3(-1, 0, 0)};
         return normals;
     }
 }
